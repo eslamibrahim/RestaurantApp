@@ -33,6 +33,30 @@ class CategoryListViewModel: BaseViewModel {
     var categoriesTableData: Observable<[Category]>
     var categories: BehaviorRelay<[Category]> = BehaviorRelay(value: [])
     
+    
+    var categoriesPerPage : BehaviorRelay<[Category]> = BehaviorRelay(value: [])
+    var lastPage : Bool {
+        if !isFromCoredata{
+            if currentPage < totalPages {
+                return false
+            }
+            else {
+                return true
+            }
+        }
+        else{
+            return true
+        }
+    }
+    var totalPages : Int  {
+        let x = totalCategoryNumber / 20
+        let y = totalCategoryNumber % 20
+        return x + y
+    }
+    var currentPage = 0
+    var totalCategoryNumber = 0
+
+    
     //Paging Metadata
     var nextPage: Int? = 1
     var isFromCoredata: Bool = false
@@ -43,7 +67,7 @@ class CategoryListViewModel: BaseViewModel {
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
-        self.categoriesTableData = categories.asObservable()
+        self.categoriesTableData = categoriesPerPage.asObservable()
         self.managedObjectContext = dependencies.managedObjectContext
         super.init()
         
@@ -66,10 +90,16 @@ class CategoryListViewModel: BaseViewModel {
                 switch result {
                 case .success(let response):
                     if response.data != nil {
+                        self.totalCategoryNumber = response.meta?.total ?? 0
                         for category in response.data! {
                             _ = try? self.managedObjectContext.rx.update(CategoryCoreData.init(category: category))
                         }
                         self.categories.accept(response.data! +  self.categories.value)
+                        if !self.lastPage{
+                        let array = self.categories.value[(self.currentPage*20)..<((self.currentPage + 1)*20)]
+                            self.categoriesPerPage.accept(Array(array))
+                        }
+                        
                     }
                     self.nextPage = response.nextPage
                 default:
@@ -105,6 +135,11 @@ extension CategoryListViewModel {
                 }
                 self.categories.accept(categories + self.categories.value)
                 self.nextPage = (self.categories.value.count/50)+1
+                if (_categories.count % 20) >= 0 {
+                    let array = self.categories.value[(self.currentPage*20)..<((self.currentPage + 1)*20)]
+                    self.categoriesPerPage.accept(Array(array))
+                }
+
             }).disposed(by: disposeBag)
     }
 }

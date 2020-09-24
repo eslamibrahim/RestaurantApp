@@ -25,11 +25,27 @@ class CategoriesListViewController: BaseViewController {
 
     
     @IBAction func previous(_ sender: Any) {
-        
+        if (self.viewModel.currentPage != 0) {
+            let array = self.viewModel.categories.value[((self.viewModel.currentPage - 1)*20)..<(self.viewModel.currentPage*20)]
+            self.viewModel.categoriesPerPage.accept(Array(array))
+            self.viewModel.currentPage = self.viewModel.currentPage - 1
+        }
     }
     
     @IBAction func next(_ sender: Any) {
-        
+        if !self.viewModel.lastPage{
+            let x = self.viewModel.totalCategoryNumber % 20
+            if x == 0 {
+                let array = self.viewModel.categories.value[(self.viewModel.currentPage*20)..<((self.viewModel.currentPage + 1)*20)]
+                self.viewModel.categoriesPerPage.accept(Array(array))
+                self.viewModel.currentPage = self.viewModel.currentPage + 1
+            }
+            else {
+                let array = self.viewModel.categories.value[(self.viewModel.currentPage*20)..<((self.viewModel.currentPage*20) + x)]
+                self.viewModel.categoriesPerPage.accept(Array(array))
+                self.viewModel.currentPage = self.viewModel.currentPage + 1
+            }
+        }
     }
     
 }
@@ -65,7 +81,12 @@ extension CategoriesListViewController {
             .willDisplayCell
             .filter({[weak self] (cell, indexPath) in
                 guard let `self` = self else { return false }
+                if self.viewModel.lastPage {
                 return (indexPath.row + 1) == self.collectionView.numberOfItems(inSection: indexPath.section) - 3
+                }
+                else {
+                    return false
+                }
             })
             .throttle(1.0, scheduler: MainScheduler.instance)
             .map({ event -> Void in

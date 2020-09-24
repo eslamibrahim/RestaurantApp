@@ -13,9 +13,5 @@ class Meta: Codable {
     var total : Int?
     var perPage : Int?
     var lastPage : Int?
-    
-    private enum CodingKeys: String, CodingKey {
-        case  total, perPage = "per_page" , currentPage = "current_page" , lastPage = "last_page"
-    }
 
 }

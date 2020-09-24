@@ -145,6 +145,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="133" height="133"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="az4-o0-nQ6" secondAttribute="height" id="3CW-V8-8Ki"/>
+                                                                <constraint firstAttribute="width" constant="133" id="deH-iG-eFQ"/>
+                                                                <constraint firstAttribute="height" constant="133" id="pkw-jo-8lp"/>
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Sut-dz-MHZ">
