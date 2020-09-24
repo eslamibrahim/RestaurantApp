@@ -19,7 +19,8 @@ target 'task' do
 
   #Alert
   pod 'SwiftMessages'
-    
+  pod 'PopupDialog'
+
   # Activity Indicator
   pod 'MBProgressHUD'
   # Pods for task

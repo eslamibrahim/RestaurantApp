@@ -4,7 +4,6 @@
 //  Created by islam on 9/23/20.
 //
 
-
 import Foundation
 
 enum APIResult <Value> {

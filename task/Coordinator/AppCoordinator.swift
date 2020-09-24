@@ -21,13 +21,14 @@ final class AppCoordinator: Coordinator<Void> {
     
     override func start() -> Observable<Void> {
         // Show Movie list screen
-        return showMovieList()
+        return showCategoriesList()
     }
     
-    private func showMovieList() -> Observable<Void> {
+    private func showCategoriesList() -> Observable<Void> {
         let rootCoordinator = RootCoordinator(navigationController: navigationController, dependencies: self.dependencies)
         return coordinate(to: rootCoordinator)
     }
+    
     
     deinit {
         plog(AppCoordinator.self)
@@ -47,14 +48,14 @@ class RootCoordinator: Coordinator<Void>{
     }
     
     override func start() -> Observable<CoordinationResult> {
-        let viewModel = MoviesListViewModel.init(dependencies: self.dependencies)
-        let viewController = UIStoryboard.main.moviesListViewController
+        let viewModel = CategoryListViewModel.init(dependencies: self.dependencies)
+        let viewController = UIStoryboard.main.categoriesListViewController
         viewController.viewModel = viewModel
         
-        viewModel.selectedMovie.asObservable().subscribe(onNext: {[weak self] movie in
+        viewModel.selectedCategory.asObservable().subscribe(onNext: {[weak self] category in
             guard let `self` = self else {return}
-            guard let _movie = movie else {return}
-            self.pushToMovieDetails(selectedMovie: _movie)
+            guard let _category = category else {return}
+            self.pushToProducts(category: _category)
         }).disposed(by: disposeBag)
         
         rootNavigationController.pushViewController(viewController, animated: true)
@@ -63,21 +64,16 @@ class RootCoordinator: Coordinator<Void>{
         return Observable.never()
     }
     
-    func pushToMovieDetails(selectedMovie: Movie) {
-        let viewModel = MovieDetailViewModel.init(dependencies: self.dependencies, movie: selectedMovie)
-        let viewController = UIStoryboard.main.movieDetailsViewController
-        viewController.viewModel = viewModel
-        
-        viewModel.popToMovieList
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self.rootNavigationController.popViewController(animated: true)
-            }).disposed(by: disposeBag)
-        
-        rootNavigationController.pushViewController(viewController, animated: true)
-    }
     
+    func pushToProducts(category : Category) {
+        let productsListCoodinator = ProductsListCoodinator(navigationController: rootNavigationController, dependencies: self.dependencies, category: category)
+       _ = self.coordinate(to: productsListCoodinator)
+    }
     deinit {
         plog(RootCoordinator.self)
     }
+}
+
+protocol PresentProductDetails {
+    func presentPopup(product : Product)
 }

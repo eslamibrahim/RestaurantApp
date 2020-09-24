@@ -5,7 +5,6 @@
 //  Created by islam on 9/23/20.
 //
 
-
 import UIKit
 import RxSwift
 import RxCocoa
@@ -23,22 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return navigationController
     }()
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        // Set navigation controller as root view
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        // Initialise coordinator to manage navigation flow
-//        appCoordinator = AppCoordinator(window: window!, navigationController: navigationController)
-//        appCoordinator?.start()
-//            .subscribe()
-//            .disposed(by: disposeBag)
-//        window?.makeKeyAndVisible()
-//        
-//        let navigationBarAppearace = UINavigationBar.appearance()
-//        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.font: Fonts.Helvetica.bold(of: 18), NSAttributedString.Key.foregroundColor: UIColor.white]
-        
+ 
         return true
     }
 

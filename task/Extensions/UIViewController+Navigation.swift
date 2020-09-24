@@ -34,7 +34,7 @@ extension UIViewController{
     func configureNavigationWithAction(_ title:String? ,leftImage: UIImage?,actionForLeft: (() -> ())?,rightImage: UIImage?,actionForRight: (() -> ())?){
         self._actionLeft = actionForLeft
         self._actionRight = actionForRight
-        navigationController?.navigationBar.barTintColor = Colors.navigaitonColor
+        navigationController?.navigationBar.barTintColor = UIColor.darkGray
         if title != nil{
             self.title = title!
         }

@@ -17,18 +17,27 @@ extension UIStoryboard {
 
 extension UIStoryboard {
     
-    var moviesListViewController: MoviesListViewController {
-        guard let viewController = instantiateViewController(withIdentifier: String(describing: MoviesListViewController.self)) as? MoviesListViewController else {
-            fatalError(String(describing: MoviesListViewController.self) + "\(NSLocalizedString("couldn't be found in Storyboard file", comment: ""))")
+
+    
+    var categoriesListViewController: CategoriesListViewController {
+        guard let viewController = instantiateViewController(withIdentifier: String(describing: CategoriesListViewController.self)) as? CategoriesListViewController else {
+            fatalError(String(describing: CategoriesListViewController.self) + "\(NSLocalizedString("couldn't be found in Storyboard file", comment: ""))")
+        }
+        return viewController
+    }
+    var productsViewController: ProductsViewController {
+        guard let viewController = instantiateViewController(withIdentifier: String(describing: ProductsViewController.self)) as? ProductsViewController else {
+            fatalError(String(describing: ProductsViewController.self) + "\(NSLocalizedString("couldn't be found in Storyboard file", comment: ""))")
         }
         return viewController
     }
     
-    var movieDetailsViewController: MovieDetailsViewController {
-        guard let viewController = instantiateViewController(withIdentifier: String(describing: MovieDetailsViewController.self)) as? MovieDetailsViewController else {
-            fatalError(String(describing: MovieDetailsViewController.self) + "\(NSLocalizedString("couldn't be found in Storyboard file", comment: ""))")
+    var productDetailsPopUpViewController: ProductDetailsPopUpViewController {
+        guard let viewController = instantiateViewController(withIdentifier: String(describing: ProductDetailsPopUpViewController.self)) as? ProductDetailsPopUpViewController else {
+            fatalError(String(describing: ProductDetailsPopUpViewController.self) + "\(NSLocalizedString("couldn't be found in Storyboard file", comment: ""))")
         }
         return viewController
     }
+    
     
 }

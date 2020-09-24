@@ -8,8 +8,5 @@ import Foundation
 
 enum Params: String {
     case page
-    case totalResults
-    case totalPages
-    case apiKey = "api_key"
-    
+    case include
 }

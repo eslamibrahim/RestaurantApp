@@ -33,8 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator?.start()
             .subscribe()
             .disposed(by: disposeBag)
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.font: Fonts.Helvetica.bold(of: 18), NSAttributedString.Key.foregroundColor: UIColor.white]
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

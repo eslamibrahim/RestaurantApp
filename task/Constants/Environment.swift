@@ -22,7 +22,8 @@ class Environment {
     class func APIBasePath() -> String {
         switch self.server {
             case .developement:
-                return "https://api.themoviedb.org/"
+            //    return "https://api.themoviedb.org/"
+               return  "https://api.foodics.dev/"
             case .staging:
                 return ""
             case .production:
@@ -33,7 +34,7 @@ class Environment {
     class func APIVersionPath() -> String {
         switch self.server {
         case .developement:
-            return "3/"
+            return "v5/"
         case .staging:
             return ""
         case .production:

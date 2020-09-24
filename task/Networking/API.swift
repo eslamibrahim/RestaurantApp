@@ -20,32 +20,11 @@ class API {
     init() {
         
     }
-    
-    // Call Get Movie List API
-    func getMovieList(param: Parameters) -> Observable<APIResult<GetMovieResponse>> {
+
+    // Call categories API
+    func getCategoriesDetails(param : Parameters) -> Observable<APIResult<GetCategoryResponse>> {
         
-        return API.handleDataRequest(dataRequest: APIManager.shared.requestObservable(api: APIRouter.getMovieList(param))).map({ (response) -> APIResult<GetMovieResponse> in
-            if (response ?? [:]).keys.contains("Error") {
-                if (response ?? [:]).keys.contains("IsInternetOff") {
-                    if let isInternetOff = response!["IsInternetOff"] as? Bool {
-                        if isInternetOff {
-                            return APIResult.failure(error: APICallError(critical: false, code: InternetConnectionErrorCode.offline.rawValue, reason: response!["Error"] as! String, message: response!["Error"] as! String))
-                        }
-                    }
-                }
-                return APIResult.failure(error: APICallError(critical: false, code: 1111, reason: response!["Error"] as! String, message: response!["Error"] as! String))
-            }
-            
-            let apiResponse = GetMovieResponse(response: response)
-            let (apiStatus, _) = (true, APICallError.init(status: .success))
-            if apiStatus { return APIResult.success(value: apiResponse) }
-        })
-    }
-    
-    // Call movie details API
-    func getMovieDetails(id: String,param: Parameters) -> Observable<APIResult<GetMovieDetailResponse>> {
-        
-        return API.handleDataRequest(dataRequest: APIManager.shared.requestObservable(api: APIRouter.getMovieDetails(movieId: id, param: param))).map({ (response) -> APIResult<GetMovieDetailResponse> in
+        return API.handleDataRequest(dataRequest: APIManager.shared.requestObservable(api: APIRouter.getCategoriesList(param))).map({ (response) -> APIResult<GetCategoryResponse> in
             if (response ?? [:]).keys.contains("Error"){
                 if (response ?? [:]).keys.contains("IsInternetOff"){
                     if let isInternetOff = response!["IsInternetOff"] as? Bool{
@@ -56,7 +35,26 @@ class API {
                 }
                 return APIResult.failure(error: APICallError(critical: false, code: 1111, reason: response!["Error"] as! String, message: response!["Error"] as! String))
             }
-            let apiResponse = GetMovieDetailResponse(response: response)
+            let apiResponse = GetCategoryResponse(response: response)
+            let (apiStatus, _) = (true,APICallError.init(status: .success))
+            if apiStatus { return APIResult.success(value: apiResponse) }
+        })
+    }
+    // Call products API
+    func getProducts(param : Parameters) -> Observable<APIResult<GetProductResponse>> {
+        
+        return API.handleDataRequest(dataRequest: APIManager.shared.requestObservable(api: APIRouter.getProductsList(param))).map({ (response) -> APIResult<GetProductResponse> in
+            if (response ?? [:]).keys.contains("Error"){
+                if (response ?? [:]).keys.contains("IsInternetOff"){
+                    if let isInternetOff = response!["IsInternetOff"] as? Bool{
+                        if isInternetOff{
+                            return APIResult.failure(error: APICallError(critical: false, code: InternetConnectionErrorCode.offline.rawValue, reason: response!["Error"] as! String, message: response!["Error"] as! String))
+                        }
+                    }
+                }
+                return APIResult.failure(error: APICallError(critical: false, code: 1111, reason: response!["Error"] as! String, message: response!["Error"] as! String))
+            }
+            let apiResponse = GetProductResponse(response: response)
             let (apiStatus, _) = (true,APICallError.init(status: .success))
             if apiStatus { return APIResult.success(value: apiResponse) }
         })

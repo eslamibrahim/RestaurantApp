@@ -1,10 +1,13 @@
 PODS:
   - Alamofire (5.2.2)
   - Differentiator (4.0.1)
+  - DynamicBlurView (4.1.0)
   - Kingfisher (5.15.3):
     - Kingfisher/Core (= 5.15.3)
   - Kingfisher/Core (5.15.3)
   - MBProgressHUD (1.2.0)
+  - PopupDialog (1.1.1):
+    - DynamicBlurView (~> 4.0)
   - RxAlamofire (5.6.1):
     - RxAlamofire/Core (= 5.6.1)
   - RxAlamofire/Core (5.6.1):
@@ -31,6 +34,7 @@ DEPENDENCIES:
   - Alamofire
   - Kingfisher
   - MBProgressHUD
+  - PopupDialog
   - RxAlamofire
   - RxCocoa
   - RxCoreData
@@ -42,8 +46,10 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Differentiator
+    - DynamicBlurView
     - Kingfisher
     - MBProgressHUD
+    - PopupDialog
     - RxAlamofire
     - RxCocoa
     - RxCoreData
@@ -55,8 +61,10 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   Kingfisher: 2fef2f4d9e809285aff7f6195b5290520904f3fa
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   RxAlamofire: 0531dddf378c84270e97e897333678f1cfaec3ba
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxCoreData: 1ed5f83e80facccc90fc054eb7f39a44177de56a
@@ -65,6 +73,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftMessages: 633304165351b8e3dcbb81a71f8efcd86f9c1669
 
-PODFILE CHECKSUM: e0e3c188c755ab08628a04c159b12f8bf1d858b6
+PODFILE CHECKSUM: 1b8d0ebba419bf8057c100f07b2c6a0e66eb3c75
 
 COCOAPODS: 1.9.3
