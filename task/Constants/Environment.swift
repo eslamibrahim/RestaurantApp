@@ -22,7 +22,6 @@ class Environment {
     class func APIBasePath() -> String {
         switch self.server {
             case .developement:
-            //    return "https://api.themoviedb.org/"
                return  "https://api.foodics.dev/"
             case .staging:
                 return ""
@@ -42,16 +41,6 @@ class Environment {
         }
     }
     
-    class func MOVIEDB_APIKEY() -> String {
-        switch self.server {
-        case .developement:
-            return "14bc774791d9d20b3a138bb6e26e2579"
-        case .staging:
-            return ""
-        case .production:
-            return ""
-        }
-    }
     
 }
 
