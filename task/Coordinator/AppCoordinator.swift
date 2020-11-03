@@ -69,6 +69,7 @@ class RootCoordinator: Coordinator<Void>{
         let productsListCoodinator = ProductsListCoodinator(navigationController: rootNavigationController, dependencies: self.dependencies, category: category)
        _ = self.coordinate(to: productsListCoodinator)
     }
+    
     deinit {
         plog(RootCoordinator.self)
     }

@@ -7,6 +7,7 @@ target 'task' do
  # Design
   pod 'RxSwift'
   pod 'RxCocoa'
+  
 
   # Network
   pod 'Alamofire'
@@ -16,10 +17,13 @@ target 'task' do
   #CoreData
   pod 'RxCoreData'
   pod 'RxDataSources'
+  pod 'CryptoSwift'
 
   #Alert
   pod 'SwiftMessages'
   pod 'PopupDialog'
+  pod 'IQKeyboardManagerSwift'
+
 
   # Activity Indicator
   pod 'MBProgressHUD'
